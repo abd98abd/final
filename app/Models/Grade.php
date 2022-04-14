@@ -11,10 +11,25 @@ class Grade extends Model
 
     use HasTranslations;
     public $translatable = ['Name'];
-
     protected $fillable=['Name','Note'];
     protected $table = 'Grades';
     public $timestamps = true;
+
+
+
+
+
+   public function classroom(){
+
+
+
+        return $this->belongsTo('App\Models\Classroom',foreignKey:'Grade_id');
+
+
+
+    }
+
+
 
 
 

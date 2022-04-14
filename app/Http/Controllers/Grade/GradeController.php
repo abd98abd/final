@@ -41,7 +41,7 @@ class GradeController extends Controller
    *
    * @return Response
    */
-  public function store(RequestsStoreGrades $request)
+  public function store(Request $request)
   {
 
     if(Grade::where('Name->ar',$request->Name)->orWhere('Name->en',$request->Name_en)->exists()){

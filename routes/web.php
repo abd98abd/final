@@ -57,6 +57,15 @@ Route::group(
 
         });
 
+        Route::group(['namespace'=>'ClassRoom'],function(){
+
+
+            Route::resource('classroom','ClassroomController');
+
+
+
+        });
+
     });
 
 

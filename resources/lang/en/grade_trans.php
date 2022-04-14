@@ -12,14 +12,12 @@ return [
     'stage_name_ar' => 'stage_name_ar',
     'stage_name_en' => 'stage_name_en',
     'Notes' => 'Notes',
-    'submit' => 'submit',
+    'submit' => 'Saving data',
     'Name'=>'Name',
     'Processes'=>'Processes',
     'delete_Grade_Error'=>'The Grade cannot be deleted because there are classes attached to it',
     'Edit'=>'Edit',
-
     'exist'=>'Field name already exists',
-
     'existss'=>'This field already exists',
     'Delete'=>'Delete',
     'Close' => 'Close',

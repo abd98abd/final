@@ -2,6 +2,7 @@
 
 return [
 
+
     'Dashboard'=>'Dashboard',
     'Dashboard_page'=>'Dashboard',
     'Main_title' => 'MoraSoft School Management Program',
