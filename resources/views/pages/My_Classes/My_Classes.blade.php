@@ -43,16 +43,18 @@
 
             <br><br>
 
-                <form action="" method="POST">
-                    {{ csrf_field() }}
-                    <select class="selectpicker" data-style="btn-info" name="Grade_id" required
-                            onchange="this.form.submit()">
-                        <option value="" selected disabled>{{ trans('My_Classes_trans.Search_By_Grade') }}</option>
-                        @foreach ($Grades as $Grade)
-                            <option value="{{ $Grade->id }}">{{ $Grade->Name }}</option>
-                        @endforeach
-                    </select>
-                </form>
+            <form action="{{ route('Filter_Classes') }}" method="POST">
+                {{ csrf_field() }}
+                <select class="selectpicker" data-style="btn-info" name="Grade_id" required
+                        onchange="this.form.submit()">
+                    <option value="" selected disabled>{{ trans('My_Classes_trans.Search_By_Grade') }}</option>
+                    @foreach ($grade as $Grade)
+                        <option value="{{ $Grade->id }}">{{ $Grade->Name }}</option>
+                    @endforeach
+                </select>
+            </form>
+
+
 
 
 
@@ -70,7 +72,7 @@
                     </thead>
                     <tbody>
 
-                    @if (isset($details))
+                        @if (isset($details))
 
                         <?php $My_Classes = $details; ?>
                     @else
@@ -79,6 +81,10 @@
                     @endif
 
                         <?php $i = 0; ?>
+
+
+
+
 
                         @foreach ($My_Classes as $My_Class)
                             <tr>
@@ -145,14 +151,7 @@
                                                         :</label>
                                                     <select class="form-control form-control-lg"
                                                             id="exampleFormControlSelect1" name="Grade_id">
-                                                        <option value="{{ $My_Class->Grades->id }}">
-                                                            {{ $My_Class->Grades->Name }}
-                                                        </option>
-                                                        @foreach ($Grades as $Grade)
-                                                            <option value="{{ $Grade->id }}">
-                                                                {{ $Grade->Name }}
-                                                            </option>
-                                                        @endforeach
+
                                                     </select>
 
                                                 </div>
@@ -226,7 +225,9 @@
                     {{ trans('My_Classes_trans.add_class') }}
                 </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+
                     <span aria-hidden="true">&times;</span>
+
                 </button>
             </div>
             <div class="modal-body">
@@ -261,13 +262,13 @@
                                                 class="mr-sm-2">{{ trans('My_Classes_trans.Name_Grade') }}
                                                 :</label>
 
-                                            <div class="box">
-                                                <select class="fancyselect" name="Grade_id">
-                                                    @foreach ($Grades as $Grade)
-                                                        <option value="{{ $Grade->id }}">{{ $Grade->Name }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
+                                                <div class="box">
+                                                    <select class="fancyselect" name="Grade_id">
+                                                        @foreach ($grade as $Grade)
+                                                            <option value="{{ $Grade->id }}">{{ $Grade->Name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
 
                                         </div>
 
@@ -312,7 +313,9 @@
 
 
 
-<!-- حذف مجموعة صفوف -->
+<!-- ---------------------------------------- حذف مجموعة صفوف ----------------------------------- -->
+
+
 <div class="modal fade" id="delete_all" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -326,24 +329,29 @@
                 </button>
             </div>
 
-            <form action="" method="POST">
+            <form action="{{ route('delete_all') }}" method="POST">
                 {{ csrf_field() }}
                 <div class="modal-body">
+
                     {{ trans('My_Classes_trans.Warning_Grade') }}
+
                     <input class="text" type="hidden" id="delete_all_id" name="delete_all_id" value=''>
+
                 </div>
 
                 <div class="modal-footer">
+
                     <button type="button" class="btn btn-secondary"
                             data-dismiss="modal">{{ trans('My_Classes_trans.Close') }}</button>
                     <button type="submit" class="btn btn-danger">{{ trans('My_Classes_trans.submit') }}</button>
+
                 </div>
             </form>
         </div>
     </div>
 </div>
 
-
+<!-- ---------------------------------------- حذف مجموعة صفوف ----------------------------------- -->
 
 </div>
 

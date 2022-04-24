@@ -16,8 +16,8 @@ class ClassroomController extends Controller
     public function index()
     {
         $My_Classes = ModelsClassroom::all();
-        $Grades = Grade::all();
-        return view('pages.My_Classes.My_Classes', compact('My_Classes', 'Grades'));
+        $grade = Grade::all();
+        return view('pages.My_Classes.My_Classes', compact('My_Classes','grade'));
     }
 
     /**
@@ -60,18 +60,6 @@ class ClassroomController extends Controller
         } catch (\Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
-
-
-
-
-
-
-
-
-
-
-
-
 
 }
 
@@ -147,5 +135,29 @@ class ClassroomController extends Controller
         $delete->delete();
         toastr()->error(trans('messages.Delete'));
         return redirect()->route('classroom.index');
+    }
+
+    public function delete_all(Request $request)
+    {
+
+        $delete_all_id = explode(",", $request->delete_all_id);
+
+        ModelsClassroom::whereIn('id', $delete_all_id)->Delete();
+
+        toastr()->error(trans('messages.Delete'));
+
+        return redirect()->route('classroom.index');
+
+    }
+
+   public function Filter_Classes(Request $request)
+    {
+        $grade = Grade::all();
+
+        $Search = ModelsClassroom::select('*')->where('Grade_id','=',$request->Grade_id)->get();
+
+
+        return view('pages.My_Classes.My_Classes',compact('grade'))->withDetails($Search);
+
     }
 }

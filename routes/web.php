@@ -29,6 +29,8 @@ Route::group(['middleware'=>['guest']],function(){
 
 
 });
+
+
 Auth::routes();
 
 
@@ -62,9 +64,33 @@ Route::group(
 
             Route::resource('classroom','ClassroomController');
 
+            Route::post('delete_all', 'ClassroomController@delete_all')->name('delete_all');
+
+            Route::post('Filter_Classes', 'ClassroomController@Filter_Classes')->name('Filter_Classes');
 
 
         });
+
+
+        Route::group(['namespace'=>'Sections'],function(){
+
+
+            Route::resource('Sections', 'SectionController');
+
+            Route::get('/classes/{id}', 'SectionController@getclasses');
+
+
+        });
+
+        Route::group(['namespace'=>'Teachers'],function(){
+
+
+           Route::resource('Teachers','TeacherController');
+
+
+        });
+
+        Route::view('add_parent','livewire.show_Form')->name('add_parent');
 
     });
 

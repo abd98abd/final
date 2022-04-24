@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateClassroomsTable extends Migration
+class CreateParentAttachmentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateClassroomsTable extends Migration
      */
     public function up()
     {
-        Schema::create('classrooms', function (Blueprint $table) {
+        Schema::create('parent_attachments', function (Blueprint $table) {
             $table->id();
-			$table->string('Name_Class');
-			$table->unsignedBigInteger('Grade_id');
-            $table->foreign('Grade_id')->references('id')->on('Grades')->onDelete('cascade');
-			$table->timestamps();
+            $table->string('file_name')->nullable();
+            $table->bigInteger('parent_id')->unsigned();
+            $table->timestamps();
         });
     }
 
@@ -29,6 +28,6 @@ class CreateClassroomsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('classrooms');
+        Schema::dropIfExists('parent_attachments');
     }
 }
